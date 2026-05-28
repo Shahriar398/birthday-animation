@@ -1,0 +1,493 @@
+/* ---------------------------
+   Main Page
+--------------------------- */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: #d6e9ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/* ---------------------------
+   Pink Card
+--------------------------- */
+
+.card {
+    width: 500px;
+    height: 500px;
+    background: #e78d9d;
+    border-radius: 35px;
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* ---------------------------
+   Cake Main Position
+--------------------------- */
+
+#cake {
+    display: block;
+    position: relative;
+    width: 220px;
+    height: 180px;
+    margin: 122px auto 0 auto;
+}
+
+
+/* ---------------------------
+   White Plate Line
+--------------------------- */
+
+.plate {
+    width: 175px;
+    height: 4px;
+    background: #fff5e8;
+    border-radius: 10px;
+    position: absolute;
+    left: 22px;
+    bottom: 15px;
+
+    transform: scaleX(0);
+    transform-origin: center;
+    animation: plate 7s ease-out infinite;
+}
+
+
+/* ---------------------------
+   Chocolate Cake Layers
+--------------------------- */
+
+.layer {
+    width: 146px;
+    height: 17px;
+    position: absolute;
+    left: 37px;
+
+    opacity: 0;
+    transform: translateY(-300px);
+    backface-visibility: hidden;
+}
+
+
+/* Bottom chocolate layer */
+
+.layer-bottom {
+    bottom: 20px;
+    background: #725149;
+    border-radius: 0 0 5px 5px;
+
+    animation: layer-bottom 7s ease-out infinite;
+}
+
+
+/* Middle lighter layer */
+
+.layer-middle {
+    bottom: 37px;
+    background: #e4dcdc;
+
+    animation: layer-middle 7s ease-out infinite;
+}
+
+
+/* Top chocolate layer */
+
+.layer-top {
+    bottom: 54px;
+    background: #725149;
+    border-radius: 5px 5px 0 0;
+
+    animation: layer-top 7s ease-out infinite;
+}
+
+
+/* ---------------------------
+   White Icing Layer
+--------------------------- */
+
+.icing {
+    width: 150px;
+    height: 18px;
+    background: #fff5e2;
+    position: absolute;
+    left: 35px;
+    bottom: 68px;
+    border-radius: 15px 15px 7px 7px;
+    z-index: 5;
+
+    opacity: 0;
+    transform: translateY(-300px);
+    backface-visibility: hidden;
+    animation: icing 7s ease-out infinite;
+}
+
+
+/* Icing left curved side */
+
+.icing::before {
+    content: "";
+    width: 18px;
+    height: 13px;
+    background: #fff5e2;
+    position: absolute;
+    left: -1px;
+    top: 5px;
+    border-radius: 0 0 10px 10px;
+}
+
+
+/* Icing right curved side */
+
+.icing::after {
+    content: "";
+    width: 19px;
+    height: 14px;
+    background: #fff5e2;
+    position: absolute;
+    right: -1px;
+    top: 5px;
+    border-radius: 0 0 10px 10px;
+}
+
+
+/* ---------------------------
+   White Icing Drips
+--------------------------- */
+
+.drip {
+    position: absolute;
+    background: #fff5e2;
+    border-radius: 0 0 12px 12px;
+}
+
+
+/* Long drip in left side */
+
+.drip-left {
+    width: 10px;
+    height: 35px;
+    left: 22px;
+    top: 9px;
+}
+
+
+/* Small drip in middle */
+
+.drip-middle {
+    width: 13px;
+    height: 18px;
+    left: 86px;
+    top: 9px;
+}
+
+
+/* Long drip in right side */
+
+.drip-right {
+    width: 9px;
+    height: 29px;
+    right: 10px;
+    top: 8px;
+}
+
+
+/* ---------------------------
+   Candle
+--------------------------- */
+
+.candle {
+    background: repeating-linear-gradient(
+        to bottom,
+        #fff7ed 0px,
+        #fff7ed 7px,
+        #dc8291 7px,
+        #dc8291 11px
+    );
+
+    border-radius: 10px;
+    position: absolute;
+    top: 60px;
+    left: 50%;
+    margin-left: -3px;
+    width: 6px;
+    height: 34px;
+    z-index: 10;
+
+    transform: translateY(-300px);
+    backface-visibility: hidden;
+    opacity: 0;
+    animation: candle 7s ease-out infinite;
+}
+
+
+/* ---------------------------
+   Candle Flame
+--------------------------- */
+
+.flame {
+    width: 10px;
+    height: 20px;
+    background: #ffd268;
+    border-radius: 50%;
+    position: absolute;
+    top: -25px;
+    left: -2px;
+
+    box-shadow:
+        0 0 10px #ffd268,
+        0 0 22px rgba(255, 210, 104, 0.7);
+
+    opacity: 0;
+    transform-origin: center bottom;
+
+    animation:
+        flame-show 7s ease-out infinite,
+        flame-move 0.5s ease-in-out infinite alternate;
+}
+
+
+/* ---------------------------
+   Birthday Text
+--------------------------- */
+
+.message {
+    text-align: center;
+    margin-top: 12px;
+    color: #855d5e;
+
+    opacity: 0;
+    animation: message 7s ease-out infinite;
+}
+
+.message h1 {
+    font-size: 22px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.message p {
+    margin-top: 14px;
+    font-size: 15px;
+    font-style: italic;
+}
+
+
+/* ---------------------------
+   Plate Animation
+--------------------------- */
+
+@keyframes plate {
+
+    0%, 5% {
+        transform: scaleX(0);
+        opacity: 0;
+    }
+
+    12%, 90% {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scaleX(0);
+        opacity: 0;
+    }
+}
+
+
+/* ---------------------------
+   Bottom Layer Animation
+--------------------------- */
+
+@keyframes layer-bottom {
+
+    0%, 13% {
+        opacity: 0;
+        transform: translateY(-300px);
+    }
+
+    21%, 90% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(0);
+    }
+}
+
+
+/* ---------------------------
+   Middle Layer Animation
+--------------------------- */
+
+@keyframes layer-middle {
+
+    0%, 22% {
+        opacity: 0;
+        transform: translateY(-300px);
+    }
+
+    30%, 90% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(0);
+    }
+}
+
+
+/* ---------------------------
+   Top Layer Animation
+--------------------------- */
+
+@keyframes layer-top {
+
+    0%, 31% {
+        opacity: 0;
+        transform: translateY(-300px);
+    }
+
+    39%, 90% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(0);
+    }
+}
+
+
+/* ---------------------------
+   White Icing Animation
+--------------------------- */
+
+@keyframes icing {
+
+    0%, 40% {
+        opacity: 0;
+        transform: translateY(-300px);
+    }
+
+    48%, 90% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(0);
+    }
+}
+
+
+/* ---------------------------
+   Candle Animation
+--------------------------- */
+
+@keyframes candle {
+
+    0%, 50% {
+        opacity: 0;
+        transform: translateY(-300px);
+    }
+
+    59%, 90% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(0);
+    }
+}
+
+
+/* ---------------------------
+   Flame Animation
+--------------------------- */
+
+@keyframes flame-show {
+
+    0%, 59% {
+        opacity: 0;
+    }
+
+    66%, 90% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes flame-move {
+
+    from {
+        transform: rotate(-4deg) scale(1);
+    }
+
+    to {
+        transform: rotate(4deg) scale(1.12);
+    }
+}
+
+
+/* ---------------------------
+   Text Animation
+--------------------------- */
+
+@keyframes message {
+
+    0%, 65% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    73%, 90% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+}
+
+
+/* ---------------------------
+   Mobile Responsive
+--------------------------- */
+
+@media screen and (max-width: 520px) {
+
+    .card {
+        width: 94vw;
+        height: 94vw;
+        max-height: 500px;
+    }
+
+    #cake {
+        margin-top: 22vw;
+    }
+}
